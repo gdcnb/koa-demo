@@ -43,6 +43,8 @@ var co = require('co');
 //
 //console.log('r1=%j, \nr2=%j, \nr3=%j \nr4=%j \n', r1, r2, r3, r4);
 
+//问题：如何通过 yield 返回异步请求的结果值呢？
+
 /***************************** generator 异步回调demo ****************************/
  //var contentIndex = 0;
  //function getContent(content){
@@ -91,6 +93,9 @@ var co = require('co');
  //};
  //
  //autoRun(testGenerator());
+
+// Koa 框架就是将 generator 函数和 Promise 有效结合起来，通过 yield 返回异步请求的结果值。
+// 从而实现了用同步的编码方式来实现异步逻辑，这也是Koa的核心思想。
 
 /***************************** Koa 原理分析 ****************************/
 
