@@ -198,7 +198,7 @@ app.use(function *(next) {
                 this.throw(new Error('no data'))
             }
 
-        } catch (e) {
+        } catch (e) { //这里可以捕获到中间发生的任何错误，包括异步请求产生的错误
             console.log('========> 统一处理错误: ',e);
             console.log(e.stack);
 
