@@ -183,9 +183,10 @@ app.use(function *(next) {
     } else {
         console.log('===> body-begin');
         try {
+            //通过yield拿到请求的结果，在请求返回结果前下面的代码不会执行
             var result = yield api({url: 'http://nyantai.uodoo.com/channel/hot?uc_param_str=dnfr'});
 
-            //对第一个接口返回的数据进行判断再决定是否发送请求
+            //对第一个接口返回的数据进行判断再决定是否发送请求，由于是拿到上面请求的结果才会执行到这里，这样就解决了异步请求的层层回调问题
             if(result.length) {
                 var dataList = yield Promise.all([
                     api({url: 'http://hao.uc.cn'}),
@@ -198,7 +199,7 @@ app.use(function *(next) {
                 this.throw(new Error('no data'))
             }
 
-        } catch (e) { //这里可以捕获到中间发生的任何错误，包括异步请求产生的错误
+        } catch (e) { //这里可以捕获到上面业务逻辑中任何地方产生的错误，包括异步请求产生的错误
             console.log('========> 统一处理错误: ',e);
             console.log(e.stack);
 
