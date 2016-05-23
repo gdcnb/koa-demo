@@ -97,7 +97,7 @@ var co = require('co');
 // Koa 框架就是将 generator 函数和 Promise 有效结合起来，通过 yield 返回异步请求的结果值。
 // 从而实现了用同步的编码方式来实现异步逻辑，这也是Koa的核心思想。
 
-/***************************** Koa 原理分析 ****************************/
+/***************************** Koa 中间件原理分析 ****************************/
 
 //var genList = [
 //    function *(next) {
@@ -146,7 +146,7 @@ var co = require('co');
 //        var i = middleware.length;
 //
 //        while (i--) {
-//            next = middleware[i].call(this, next);
+//            next = middleware[i].call(this, next); //通过倒序的方式将gen函数方法中的 next 指向下一个gen函数，实现中间件数组的洋葱模式的执行顺序
 //        }
 //
 //        return yield *next; //返回合并后中间件数组的第一个迭代器
@@ -154,7 +154,7 @@ var co = require('co');
 //}
 //
 //var fn = co.wrap(compose(genList));
-//fn().catch(function(err) {//
+//fn().catch(function(err) {
 //    console.error('=========> error call back: '+ err);
 //});
 
